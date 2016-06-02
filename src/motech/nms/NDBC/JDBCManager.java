@@ -4,7 +4,10 @@ import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
-class DriverInfo {
+
+/**
+ * For Future Use
+ * class DriverInfo {
 
     private String DriverClass;
     private String url;
@@ -34,11 +37,13 @@ class DriverInfo {
     public String getPassword() {
         return password;
     }
-}
+}**/
 
 public class JDBCManager {
 
-    public static Connection getConnection(DriverInfo driverInfo) {
+    /**
+     * For Future Use
+     * public static Connection getConnection(DriverInfo driverInfo) {
         Connection con = null;
         try {
             Class.forName(driverInfo.getDriverClass());
@@ -54,7 +59,7 @@ public class JDBCManager {
 
     }
 
-    public static int JDBCSelect(Connection con, String query,
+    public static int JDBCSelectId(Connection con, String query,
             Map<Integer, Integer> params) {
 
         PreparedStatement prSt = null;
@@ -100,5 +105,5 @@ public class JDBCManager {
 
     }
 
-
+**/
 }
