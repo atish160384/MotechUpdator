@@ -26,7 +26,7 @@ public abstract class CsvReaderGeneric<T> {
                         .getAnnotation(CsvElement.class);
                 if (csvElement.index() == counter) {
 
-                    Method method = CsvModelFlw.class.getMethod("set" + Util
+                    Method method = clazz.getMethod("set" + Util
                                     .capitalizeFirstLetterOfFieldName(
                                             field.getName()),
                             Class.forName(field.getType().getTypeName()));
