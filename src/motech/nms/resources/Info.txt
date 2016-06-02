@@ -1,0 +1,14 @@
+##This package will contains csv to run
+
+Column Number: Paramter Name
+0:name
+1:mctsFlwId
+2:contactNumber
+3:stateCode
+4:districtCode
+5:talukaCode
+6:phcCode
+7:subcentreCode
+8:villageCode
+9:healthblockCode
+10:type
