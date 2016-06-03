@@ -5,6 +5,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class HttpGenericMethods<T> extends GsonConverter<T> {
 
     public HttpGenericMethods() {
         super();
-        httpClient = HttpClientBuilder.create().build();
+        httpClient = new DefaultHttpClient();
     }
 
     public int postwithJson(String url, T t) throws IOException {
@@ -30,8 +31,8 @@ public class HttpGenericMethods<T> extends GsonConverter<T> {
         HttpPost post = new HttpPost(url);
         StringEntity postEntity = new StringEntity(converttoJson(t),
                 ContentType.APPLICATION_JSON);
+        post.setHeader("content-type", ContentType.APPLICATION_JSON.getMimeType());
         post.setEntity(postEntity);
-        post.setHeader("Content-type", "application/json");
         return post;
     }
 

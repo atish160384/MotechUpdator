@@ -11,6 +11,7 @@ import motech.nms.util.Util;
 import org.apache.http.client.methods.HttpPost;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MotechFlwTests {
@@ -81,12 +82,34 @@ public class MotechFlwTests {
                 .createPostRequestWithJson(MotechUpdaterConstants.MOTECH_URL,
                         flwRequest);
         Assert.assertEquals(post.getRequestLine().toString(),
-                "POST http://localhost:8080/motech-platform-server/module/api/ops/addFlw HTTP/1.1");
+                "POST http://192.168.1.127:8080/motech-platform-server/module/api/ops/addFlw HTTP/1.1");
         Assert.assertEquals(post.getEntity().getContentType().getValue(),
                 "application/json; charset=UTF-8");
         Assert.assertEquals(
                 Util.convertIOToString(post.getEntity().getContent()),
                 "{\"name\":\"Loren1\",\"mctsFlwId\":\"1111111111\",\"contactNumber\":2,\"stateId\":10,\"districtId\":21,\"talukaId\":\"23\",\"phcId\":27,\"subcentreId\":23,\"villageId\":22,\"healthblockId\":33,\"type\":\"TYPE\"}");
+
     }
+
+    @Test public void PostResponseTests() throws IOException{
+        CsvReaderFlw csvReaderFlw = new CsvReaderFlw();
+        List<CsvModelFlw> flws = csvReaderFlw
+                .read("src/motech/nms/resources/valid_but_not_in_motech_hpd8_all_records_new.csv");
+        AddFlwRequest flwRequest = AddFlwRequestBuilder
+                .build(flws.get(0).getName(), flws.get(0).getMctsFlwId(),
+                        flws.get(0).getContactNumber(),
+                        flws.get(0).getStateCode(),
+                        flws.get(0).getDistrictCode(),
+                        flws.get(0).getTalukaCode(), flws.get(0).getPhcCode(),
+                        flws.get(0).getSubcentreCode(),
+                        flws.get(0).getVillageCode(),
+                        flws.get(0).getHealthblockCode(),
+                        flws.get(0).getType());
+        FlwRequestHttpMethods flwRequestHttpMethods = new FlwRequestHttpMethods();
+        int responseCode  = flwRequestHttpMethods.postwithJson(MotechUpdaterConstants.MOTECH_URL,flwRequest);
+        System.out.println(responseCode);
+
+    }
+
 
 }
