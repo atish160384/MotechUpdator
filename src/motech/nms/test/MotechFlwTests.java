@@ -107,7 +107,7 @@ public class MotechFlwTests {
                         flws.get(0).getType());
         FlwRequestHttpMethods flwRequestHttpMethods = new FlwRequestHttpMethods();
         int responseCode  = flwRequestHttpMethods.postwithJson(MotechUpdaterConstants.MOTECH_URL,flwRequest);
-        System.out.println(responseCode);
+        Assert.assertEquals(responseCode, 200);
 
     }
 

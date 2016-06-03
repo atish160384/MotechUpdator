@@ -17,7 +17,7 @@ public class MotechUpdater {
 
         CsvReaderFlw csvReaderFlw = new CsvReaderFlw();
         List<CsvModelFlw> flwsMp = csvReaderFlw
-                .read(MotechUpdaterConstants.CSV_PATH_MP);
+                .read(MotechUpdaterConstants.CSV_PATH_RAJASTHAN);
         List<CsvModelFlw> flwsRajastan = csvReaderFlw
                 .read(MotechUpdaterConstants.CSV_PATH_MP);
         List<CsvModelFlw> flws = new ArrayList<>();
