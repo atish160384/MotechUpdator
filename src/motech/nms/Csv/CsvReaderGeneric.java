@@ -29,7 +29,7 @@ public abstract class CsvReaderGeneric<T> {
                     Method method = clazz.getMethod("set" + Util
                                     .capitalizeFirstLetterOfFieldName(
                                             field.getName()),
-                            Class.forName(field.getType().getTypeName()));
+                            Class.forName(field.getType().getName()));
                     method.invoke(t, column[counter]);
                 }
             }

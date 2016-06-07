@@ -1,5 +1,6 @@
 package motech.nms.HttpMethods;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -11,7 +12,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.Base64;
+
 
 public class HttpGenericMethods<T> extends GsonConverter<T> {
 
@@ -21,7 +22,7 @@ public class HttpGenericMethods<T> extends GsonConverter<T> {
 
     public HttpGenericMethods() {
         super();
-        httpClient = new DefaultHttpClient();
+        httpClient = HttpClientBuilder.create().build();
     }
 
     public int postwithJson(String url, T t, String authHeader) throws IOException {
@@ -32,7 +33,7 @@ public class HttpGenericMethods<T> extends GsonConverter<T> {
 
     public String createAuthenticationHeader(String uname, String passwd){
         String auth = uname + ":" + passwd;
-        byte[] encodedAuth = Base64.getEncoder().encode(
+        byte[] encodedAuth = Base64.encodeBase64(
                 auth.getBytes(Charset.forName("ISO-8859-1")));
         return  "Basic " + new String(encodedAuth);
 
@@ -43,7 +44,7 @@ public class HttpGenericMethods<T> extends GsonConverter<T> {
         HttpPost post = new HttpPost(url);
         StringEntity postEntity = new StringEntity(converttoJson(t),
                 ContentType.APPLICATION_JSON);
-        post.setHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
+       post.setHeader(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.getMimeType());
         post.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
         post.setEntity(postEntity);
         return post;

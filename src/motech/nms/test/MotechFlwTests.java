@@ -62,6 +62,7 @@ public class MotechFlwTests {
                         flws.get(0).getVillageCode(),
                         flws.get(0).getHealthblockCode(),
                         flws.get(0).getType());
+        System.out.println( new FlwRequestHttpMethods().converttoJson(flwRequest));
         Assert.assertEquals(
                 new FlwRequestHttpMethods().converttoJson(flwRequest),
                 "{\"name\":\"Loren1\",\"mctsFlwId\":\"1111111111\",\"contactNumber\":2,\"stateId\":10,\"districtId\":21,\"talukaId\":\"23\",\"phcId\":27,\"subcentreId\":23,\"villageId\":22,\"healthblockId\":33,\"type\":\"TYPE\"}");
