@@ -32,8 +32,12 @@ public class MotechUpdater {
                             flw.getPhcCode(), flw.getSubcentreCode(),
                             flw.getVillageCode(), flw.getHealthblockCode(),
                             flw.getType());
-            int resultCode = new FlwRequestHttpMethods()
-                    .postwithJson(MotechUpdaterConstants.MOTECH_URL, flwRequest);
+            FlwRequestHttpMethods flwRequestHttpMethods = new FlwRequestHttpMethods();
+            int resultCode = flwRequestHttpMethods
+                    .postwithJson(MotechUpdaterConstants.MOTECH_URL, flwRequest,
+                            flwRequestHttpMethods.createAuthenticationHeader(
+                                    MotechUpdaterConstants.DEFAULT_USER,
+                                    MotechUpdaterConstants.DEFAULT_PASSWORD));
             if (resultCode == MotechUpdaterConstants.POST_OK) {
                 System.out.println(
                         "For Request with flw, " + flwRequest.toString()

@@ -26,4 +26,11 @@ public class Util {
         return new String(buffer.toByteArray());
     }
 
+    public static void main(String[] args) {
+
+        String c = null;
+        System.out.println(c.trim());
+
+    }
+
 }
