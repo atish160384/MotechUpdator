@@ -16,10 +16,10 @@ public class AddFlwRequestBuilder {
         flwRequest.setStateId(Integer.parseInt(stateId));
         flwRequest.setDistrictId(Integer.parseInt(districtId));
         flwRequest.setTalukaId(talukaId);
-        flwRequest.setVillageId(Integer.parseInt(villageId));
-        flwRequest.setHealthblockId(Integer.parseInt(healthblockId));
-        flwRequest.setPhcId(Integer.parseInt(phcId));
-        flwRequest.setSubcentreId(Integer.parseInt(subcentreId));
+        flwRequest.setVillageId((villageId.equals("NULL")) ? null : Integer.parseInt(villageId));
+        flwRequest.setHealthblockId((healthblockId.equals("NULL")) ? null : Integer.parseInt(healthblockId));
+        flwRequest.setPhcId((phcId.equals("NULL")) ? null : Integer.parseInt(phcId));
+        flwRequest.setSubcentreId((subcentreId.equals("NULL")) ? null : Integer.parseInt(subcentreId));
         flwRequest.setType(type);
         return flwRequest;
 

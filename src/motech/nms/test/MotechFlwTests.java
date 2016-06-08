@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MotechFlwTests {
 
-    private static final String SERVER_IP_PORT = "192.168.200.111:8080";
+    private static final String SERVER_IP_PORT = "localhost:8080"; // "192.168.200.111:8080";
 
     @Test public void csvReaderTest() throws Exception {
         CsvReaderFlw csvReaderFlw = new CsvReaderFlw();
