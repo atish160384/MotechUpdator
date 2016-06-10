@@ -16,13 +16,16 @@ public class MotechUpdater {
     public static void main(String[] args) throws IOException {
 
         CsvReaderFlw csvReaderFlw = new CsvReaderFlw();
-        List<CsvModelFlw> flwsMp = csvReaderFlw
-                .read(MotechUpdaterConstants.CSV_PATH_RAJASTHAN);
-        List<CsvModelFlw> flwsRajastan = csvReaderFlw
-                .read(MotechUpdaterConstants.CSV_PATH_MP);
+//        List<CsvModelFlw> flwsMp = csvReaderFlw
+//                .read(MotechUpdaterConstants.CSV_PATH_RAJASTHAN);
+//        List<CsvModelFlw> flwsRajastan = csvReaderFlw
+//                .read(MotechUpdaterConstants.CSV_PATH_MP);
+        List<CsvModelFlw> flwsComplete = csvReaderFlw
+                .read(MotechUpdaterConstants.CSV_PATH_COMPLETE);
         List<CsvModelFlw> flws = new ArrayList<>();
-        flws.addAll(flwsMp);
-        flws.addAll(flwsRajastan);
+        flws.addAll(flwsComplete);
+//        flws.addAll(flwsMP);
+//        flws.addAll(flwsRajastan);
         for (CsvModelFlw flw : flws) {
 
             AddFlwRequest flwRequest = AddFlwRequestBuilder
@@ -33,22 +36,24 @@ public class MotechUpdater {
                             flw.getVillageCode(), flw.getHealthblockCode(),
                             flw.getType());
             FlwRequestHttpMethods flwRequestHttpMethods = new FlwRequestHttpMethods();
-            int resultCode = flwRequestHttpMethods
-                    .postwithJson(MotechUpdaterConstants.MOTECH_URL, flwRequest,
-                            flwRequestHttpMethods.createAuthenticationHeader(
-                                    MotechUpdaterConstants.DEFAULT_USER,
-                                    MotechUpdaterConstants.DEFAULT_PASSWORD));
-            if (resultCode == MotechUpdaterConstants.POST_OK) {
-                System.out.println(
-                        "For Request with flw, " + flwRequest.toString()
-                                + "sync successfully done with Motech.");
-            } else if (resultCode == MotechUpdaterConstants.POST_FAILED) {
-                System.out.println(
-                        "For Request with flw, " + flwRequest.toString()
-                                + "is sync failed with Motech due validation error. ");
-            } else {
-                System.out.println(flwRequest.toString()
-                        + "is synced with Motech due to Status" + resultCode);
+            if(flwRequest!=null) {
+                int resultCode = flwRequestHttpMethods
+                        .postwithJson(MotechUpdaterConstants.MOTECH_URL, flwRequest,
+                                flwRequestHttpMethods.createAuthenticationHeader(
+                                        MotechUpdaterConstants.DEFAULT_USER,
+                                        MotechUpdaterConstants.DEFAULT_PASSWORD));
+                if (resultCode == MotechUpdaterConstants.POST_OK) {
+                    System.out.println(
+                            "For Request with flw, " + flwRequest.toString()
+                                    + "sync successfully done with Motech.");
+                } else if (resultCode == MotechUpdaterConstants.POST_FAILED) {
+                    System.out.println(
+                            "For Request with flw, " + flwRequest.toString()
+                                    + "is sync failed with Motech due validation error. ");
+                } else {
+                    System.out.println(flwRequest.toString()
+                            + "is synced with Motech due to Status" + resultCode);
+                }
             }
         }
 
