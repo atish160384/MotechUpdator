@@ -13,7 +13,7 @@ public class AddFlwRequestBuilder {
         AddFlwRequest flwRequest = new AddFlwRequest();
         flwRequest.setName(name);
         flwRequest.setMctsFlwId(mctsFlwId);
-        flwRequest.setContactNumber((contactNumber.equals("")) ? 0 : Long.parseLong(contactNumber));
+        flwRequest.setContactNumber((contactNumber.equals("")||contactNumber.equals("NA")) ? 0 : Long.parseLong(contactNumber));
         flwRequest.setStateId(Integer.parseInt(stateId));
         flwRequest.setDistrictId(Integer.parseInt(districtId));
         flwRequest.setTalukaId(talukaId);
